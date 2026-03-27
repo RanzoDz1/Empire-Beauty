@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,13 +7,13 @@
   <meta name="description" content="Empire Hair & Beauty Supply in Valdosta, GA — Your one-stop beauty destination. Shop 100% human hair, nails supply, cosmetics, barber supplies, clothing, accessories & jewelry at Promenade Plaza." />
   <meta name="keywords" content="hair supply Valdosta GA, human hair extensions, beauty supply store, nails supply, cosmetics, barber supplies, Empire Beauty Valdosta" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://empirehairdbeauty.com/" />
+  <link rel="canonical" href="{{SITE_URL}}" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Empire Hair & Beauty Supply | Valdosta, GA" />
   <meta property="og:description" content="Fully stocked beauty supply store in Valdosta, GA. 100% human hair, nails, cosmetics, barber supplies & more." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://empirehairdbeauty.com/" />
+  <meta property="og:url" content="{{SITE_URL}}" />
 
   <!-- Schema.org LocalBusiness -->
   <script type="application/ld+json">
@@ -23,15 +23,15 @@
     "name": "Empire Hair & Beauty Supply",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "1715 Norman Dr",
-      "addressLocality": "Valdosta",
-      "addressRegion": "GA",
-      "postalCode": "31601",
+      "streetAddress": "{{ADDRESS_STREET}}",
+      "addressLocality": "{{ADDRESS_LOCALITY}}",
+      "addressRegion": "{{ADDRESS_REGION}}",
+      "postalCode": "{{ADDRESS_POSTAL}}",
       "addressCountry": "US"
     },
-    "telephone": "+1-229-232-4828",
-    "email": "empirebeauty229@gmail.com",
-    "url": "https://empirehairdbeauty.com/",
+    "telephone": "{{PHONE_SCHEMA}}",
+    "email": "{{EMAIL}}",
+    "url": "{{SITE_URL}}",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -64,9 +64,9 @@
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
-      <a href="tel:+12292324828" class="header-phone" aria-label="Call Empire Hair and Beauty Supply">
+      <a href="tel:{{PHONE_TEL}}" class="header-phone" aria-label="Call Empire Hair and Beauty Supply">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        +1 229-232-4828
+        {{PHONE_DISPLAY}}
       </a>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span><span></span>
@@ -83,7 +83,7 @@
       <li><a href="#about" class="mobile-nav-link">About</a></li>
       <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
     </ul>
-    <a href="tel:+12292324828" class="mobile-phone-btn">&#128222; +1 229-232-4828</a>
+    <a href="tel:{{PHONE_TEL}}" class="mobile-phone-btn">&#128222; {{PHONE_DISPLAY}}</a>
   </div>
   <div class="mobile-overlay" id="mobile-overlay"></div>
 
@@ -301,7 +301,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">2 weeks ago</p>
             <p class="review-text">"This store is everything! I found my wig, my lashes, and a fly outfit all in one trip. The staff is so sweet and helpful. I drive 45 minutes just to shop here and it is always worth it!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -315,7 +315,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">1 month ago</p>
             <p class="review-text">"Best nail supply selection in the area by far. They carry everything from gel systems to full acrylic kits. Organized, clean, and the staff really know their products. 5 stars every time!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -329,7 +329,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">3 weeks ago</p>
             <p class="review-text">"As a barber I need reliable supplies and this is my go-to spot. Great selection of clippers, guards, and grooming products. Always stocked and priced right. Highly recommend to fellow barbers!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -343,7 +343,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">2 months ago</p>
             <p class="review-text">"First visit and I am blown away. This is a real beauty supply store, not just hair products. Clothes, jewelry, skincare, nails, everything is here. Big selection and so well organized. Will be back!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -357,7 +357,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">1 month ago</p>
             <p class="review-text">"I have been coming here for over a year and it never disappoints. The inventory is always fresh and they always have what I need. Staff is friendly and so knowledgeable. My absolute favorite spot!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -371,7 +371,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">3 months ago</p>
             <p class="review-text">"Stopped in to grab a gift for my wife and ended up spending an hour just looking around. Amazing variety of products, everything looks premium. She was absolutely thrilled with everything I picked out!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -385,7 +385,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">6 weeks ago</p>
             <p class="review-text">"Was just passing through Valdosta and decided to stop in. So glad I did! One of the best beauty supply stores I have been to in the whole Southeast. Worth the detour, trust me on this one!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -399,7 +399,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">2 months ago</p>
             <p class="review-text">"The nail section alone is worth the trip. They carry brands I cannot find anywhere else in the area. Always fully stocked and the layout makes it easy to find everything. I love this place so much!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
           <article class="review-card">
@@ -413,7 +413,7 @@
             <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-date">1 month ago</p>
             <p class="review-text">"Purchased my first set of bundles from here and the quality is incredible. 100% human hair, verified. Styling was easy and it lasted for months. I will not shop for hair anywhere else from now on!"</p>
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
+            <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
         </div>
@@ -421,7 +421,7 @@
 
       <div class="container">
         <div class="reviews-cta reveal">
-          <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D"
+          <a href="{{GOOGLE_MAPS_URL}}"
             target="_blank" rel="noopener noreferrer"
             class="btn btn-gold" id="view-all-reviews-btn">
             View All Reviews on Google
@@ -444,7 +444,7 @@
               </div>
               <div>
                 <p class="info-label">Address</p>
-                <p class="info-value">1715 Norman Dr, Valdosta, GA 31601</p>
+                <p class="info-value">{{ADDRESS_STREET}}, {{ADDRESS_CITY_STATE}}</p>
                 <p class="info-sub">Located in Promenade Plaza</p>
               </div>
             </div>
@@ -455,7 +455,7 @@
               </div>
               <div>
                 <p class="info-label">Phone</p>
-                <a href="tel:+12292324828" class="info-link">+1 229-232-4828</a>
+                <a href="tel:{{PHONE_TEL}}" class="info-link">{{PHONE_DISPLAY}}</a>
               </div>
             </div>
 
@@ -465,7 +465,7 @@
               </div>
               <div>
                 <p class="info-label">Email</p>
-                <a href="mailto:empirebeauty229@gmail.com" class="info-link">empirebeauty229@gmail.com</a>
+                <a href="mailto:{{EMAIL}}" class="info-link">{{EMAIL}}</a>
               </div>
             </div>
 
@@ -491,12 +491,12 @@
           </div>
 
           <div class="location-actions">
-            <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D"
+            <a href="{{GOOGLE_MAPS_URL}}"
               target="_blank" rel="noopener noreferrer" class="btn btn-gold" id="directions-btn">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
               Get Directions
             </a>
-            <a href="tel:+12292324828" class="btn btn-outline-light" id="call-now-btn">
+            <a href="tel:{{PHONE_TEL}}" class="btn btn-outline-light" id="call-now-btn">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
               Call Now
             </a>
@@ -505,7 +505,7 @@
 
         <div class="location-map reveal">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.75!2d-83.31772610000001!3d30.8411647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88ee677f3ca0dffb%3A0x731c08b218d047c8!2sEmpire%20hair%26beauty%20supply!5e0!3m2!1sen!2sus!4v1711484400000!5m2!1sen!2sus"
+            src="{{GOOGLE_MAPS_EMBED}}"
             width="100%"
             height="420"
             style="border:0;"
@@ -513,7 +513,7 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="Empire Hair & Beauty Supply Location Map"
-            aria-label="Google Maps showing Empire Hair and Beauty Supply at 1715 Norman Dr, Valdosta, GA">
+            aria-label="Google Maps showing Empire Hair and Beauty Supply at {{ADDRESS_STREET}}, Valdosta, GA">
           </iframe>
         </div>
       </div>
@@ -546,7 +546,7 @@
               <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
-              <p>Yes! We offer wholesale and bulk discount options. Please call us at <a href="tel:+12292324828" class="faq-link">+1 229-232-4828</a> to discuss your needs and get pricing information tailored to your order.</p>
+              <p>Yes! We offer wholesale and bulk discount options. Please call us at <a href="tel:{{PHONE_TEL}}" class="faq-link">{{PHONE_DISPLAY}}</a> to discuss your needs and get pricing information tailored to your order.</p>
             </div>
           </div>
 
@@ -566,7 +566,7 @@
               <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
-              <p>We are currently a walk-in retail store focused on providing you the best in-person shopping experience. For special requests or product holds, please call us at <a href="tel:+12292324828" class="faq-link">+1 229-232-4828</a>.</p>
+              <p>We are currently a walk-in retail store focused on providing you the best in-person shopping experience. For special requests or product holds, please call us at <a href="tel:{{PHONE_TEL}}" class="faq-link">{{PHONE_DISPLAY}}</a>.</p>
             </div>
           </div>
 
@@ -576,7 +576,7 @@
               <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
-              <p>We carry extensive inventory across all beauty categories. Give us a call at <a href="tel:+12292324828" class="faq-link">+1 229-232-4828</a> and our knowledgeable staff will help locate or source the specific product you are looking for.</p>
+              <p>We carry extensive inventory across all beauty categories. Give us a call at <a href="tel:{{PHONE_TEL}}" class="faq-link">{{PHONE_DISPLAY}}</a> and our knowledgeable staff will help locate or source the specific product you are looking for.</p>
             </div>
           </div>
 
@@ -586,7 +586,7 @@
               <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6">
-              <p>We accept most major payment methods including cash and credit/debit cards. Please contact us at <a href="tel:+12292324828" class="faq-link">+1 229-232-4828</a> for any payment questions before your visit.</p>
+              <p>We accept most major payment methods including cash and credit/debit cards. Please contact us at <a href="tel:{{PHONE_TEL}}" class="faq-link">{{PHONE_DISPLAY}}</a> for any payment questions before your visit.</p>
             </div>
           </div>
 
@@ -638,13 +638,13 @@
       <div class="footer-col">
         <h4 class="footer-heading">Follow Us</h4>
         <div class="social-links">
-          <a href="https://www.facebook.com/profile.php?id=61560618136507" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Empire on Facebook">
+          <a href="{{FACEBOOK_URL}}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Empire on Facebook">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
           </a>
-          <a href="https://www.instagram.com/empire_hairandbeauty_supply" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Empire on Instagram">
+          <a href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Empire on Instagram">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="https://www.google.com/maps/place/Empire+hair%26beauty+supply/@30.8411647,-83.3177261,17z/data=!3m1!4b1!4m6!3m5!1s0x88ee677f3ca0dffb:0x731c08b218d047c8!8m2!3d30.8411647!4d-83.3177261!16s%2Fg%2F11v_4jk0wp?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Find Empire on Google Maps">
+          <a href="{{GOOGLE_MAPS_URL}}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Find Empire on Google Maps">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           </a>
         </div>
@@ -653,9 +653,9 @@
       <div class="footer-col">
         <h4 class="footer-heading">Contact</h4>
         <ul class="footer-contact">
-          <li><a href="tel:+12292324828" class="footer-contact-link">+1 229-232-4828</a></li>
-          <li><a href="mailto:empirebeauty229@gmail.com" class="footer-contact-link">empirebeauty229@gmail.com</a></li>
-          <li class="footer-address">1715 Norman Dr<br/>Valdosta, GA 31601</li>
+          <li><a href="tel:{{PHONE_TEL}}" class="footer-contact-link">{{PHONE_DISPLAY}}</a></li>
+          <li><a href="mailto:{{EMAIL}}" class="footer-contact-link">{{EMAIL}}</a></li>
+          <li class="footer-address">{{ADDRESS_STREET}}<br/>{{ADDRESS_CITY_STATE}}</li>
         </ul>
       </div>
     </div>
@@ -673,7 +673,7 @@
   </footer>
 
   <!-- Sticky Mobile Call Button -->
-  <a href="tel:+12292324828" class="mobile-call-btn" id="mobile-call-btn" aria-label="Call Empire Hair and Beauty Supply">
+  <a href="tel:{{PHONE_TEL}}" class="mobile-call-btn" id="mobile-call-btn" aria-label="Call Empire Hair and Beauty Supply">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
   </a>
 

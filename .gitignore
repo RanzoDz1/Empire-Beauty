@@ -18,3 +18,8 @@ desktop.ini
 # Build artifacts
 dist/
 .cache/
+
+# Environment variables (NEVER commit real contact data)
+.env
+.env.local
+.env*.local
