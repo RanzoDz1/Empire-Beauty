@@ -158,6 +158,8 @@
   /* ══════════════════════════════════════════
      SMOOTH SCROLL
   ══════════════════════════════════════════ */
+  function easeOutQuart(t) { return 1 - (--t) * t * t * t; }
+
   $$('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
       const id = anchor.getAttribute('href');
@@ -165,8 +167,28 @@
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
+      
       const hH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 80;
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - hH - 8, behavior: 'smooth' });
+      const offset = hH + 8;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      const duration = 800; // ms
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        const ease = easeOutQuart(progress);
+        window.scrollTo(0, startPosition + (distance * ease));
+        
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      }
+      requestAnimationFrame(animation);
     });
   });
 
