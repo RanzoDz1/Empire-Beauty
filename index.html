@@ -46,6 +46,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta property="og:image" content="{{SITE_URL}}/og-image.jpg">
 </head>
 <body>
 
@@ -286,9 +289,10 @@
         </div>
       </div>
 
-      <!-- Marquee (full-width, no container) -->
+      <!-- Marquee (constrained width to show 3 cards exactly) -->
       <div class="reviews-marquee-outer" role="region" aria-label="Customer reviews slider">
-        <div class="reviews-marquee-track" id="reviews-marquee-track">
+        <div class="container" style="max-width: 1120px; overflow: hidden; margin: 0 auto;">
+          <div class="reviews-marquee-track" id="reviews-marquee-track">
 
           <article class="review-card">
             <div class="review-header">
@@ -416,6 +420,7 @@
             <a href="{{GOOGLE_MAPS_URL}}" class="review-read-more" target="_blank" rel="noopener noreferrer">Read on Google</a>
           </article>
 
+          </div>
         </div>
       </div>
 
