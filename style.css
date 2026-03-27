@@ -560,22 +560,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   inset: 0;
   background: linear-gradient(
     145deg,
-    rgba(255,255,255,0.93) 0%,
-    rgba(255,255,255,0.86) 55%,
-    rgba(245,241,232,0.78) 100%
+    rgba(255,255,255,0.73) 0%,
+    rgba(255,255,255,0.56) 55%,
+    rgba(245,241,232,0.48) 100%
   );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: calc(var(--radius-md) - 1px);
   z-index: 0;
-  transition: background var(--transition-slow);
+  transition: all var(--transition-slow);
 }
 
 .cat-card:hover::before {
   background: linear-gradient(
     145deg,
-    rgba(255,255,255,0.88) 0%,
-    rgba(255,255,255,0.80) 55%,
-    rgba(245,241,232,0.70) 100%
+    rgba(255,255,255,0.68) 0%,
+    rgba(255,255,255,0.50) 55%,
+    rgba(245,241,232,0.40) 100%
   );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* All card content sits above the overlay */
