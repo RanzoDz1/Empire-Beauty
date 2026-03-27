@@ -183,4 +183,72 @@
     navLinks.forEach(l => { l.style.color = l.getAttribute('href') === '#' + activeId ? 'var(--pink)' : ''; });
   }, { passive: true });
 
+  /* ══════════════════════════════════════════
+     CATEGORY MODALS
+  ══════════════════════════════════════════ */
+  const categoryCards = $$('.cat-card');
+  
+  // Create modal container dynamically
+  const modalHTML = `
+    <div id="category-modal" class="modal-overlay" aria-hidden="true">
+      <div class="modal-container">
+        <button class="modal-close" aria-label="Close modal">&#10005;</button>
+        <div class="modal-content-wrap">
+          <div class="modal-image-col">
+            <div id="modal-image" class="modal-image"></div>
+          </div>
+          <div class="modal-text-col">
+             <div id="modal-icon" class="modal-icon-wrap"></div>
+             <h3 id="modal-title" class="modal-title"></h3>
+             <p id="modal-desc" class="modal-desc"></p>
+             <a href="#contact" class="btn btn-gold modal-btn" onclick="document.getElementById('category-modal').classList.remove('open');">Inquire About This</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+  const modal = $('#category-modal');
+  const modalCloseBtn = $('.modal-close', modal);
+  const mTitle = $('#modal-title', modal);
+  const mDesc = $('#modal-desc', modal);
+  const mIcon = $('#modal-icon', modal);
+  const mImg = $('#modal-image', modal);
+
+  function openCategoryModal(card) {
+    const title = $('.cat-title', card).innerText;
+    const desc = $('.cat-desc', card).innerText;
+    const iconHTML = $('.cat-icon-wrap', card).innerHTML;
+    // Extract bg image url
+    const bgUrl = card.style.backgroundImage;
+
+    mTitle.innerText = title;
+    mDesc.innerText = desc;
+    mIcon.innerHTML = iconHTML;
+    mImg.style.backgroundImage = bgUrl;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCategoryModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  categoryCards.forEach(card => {
+    // Make them look clickable
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => openCategoryModal(card));
+  });
+
+  if(modalCloseBtn) modalCloseBtn.addEventListener('click', closeCategoryModal);
+  if(modal) modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeCategoryModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeCategoryModal(); });
+
 })();
