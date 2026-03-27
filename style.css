@@ -551,18 +551,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   cursor: default;
   background-size: cover;
   background-position: center;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-/* Frosted glass overlay — keeps text readable while image shows through */
+/* Dark gradient overlay anchored to bottom — photos show through beautifully */
 .cat-card::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.93) 0%,
-    rgba(255,255,255,0.86) 55%,
-    rgba(245,241,232,0.78) 100%
+    to top,
+    rgba(0,0,0,0.82) 0%,
+    rgba(0,0,0,0.45) 50%,
+    rgba(0,0,0,0.08) 100%
   );
   border-radius: calc(var(--radius-md) - 1px);
   z-index: 0;
@@ -571,10 +575,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .cat-card:hover::before {
   background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.88) 0%,
-    rgba(255,255,255,0.80) 55%,
-    rgba(245,241,232,0.70) 100%
+    to top,
+    rgba(0,0,0,0.92) 0%,
+    rgba(0,0,0,0.60) 55%,
+    rgba(0,0,0,0.15) 100%
   );
 }
 
@@ -600,9 +604,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .cat-icon-wrap {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(4px);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -613,33 +618,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .cat-card:hover .cat-icon-wrap {
-  background: linear-gradient(135deg, rgba(181,50,95,0.12), rgba(181,50,95,0.04));
-  color: var(--pink);
+  background: rgba(255,255,255,0.28);
+  color: #fff;
 }
 
 .cat-title {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 20px;
-  color: var(--charcoal);
+  color: #fff;
   margin-bottom: var(--sp-1);
   transition: color var(--transition);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
-.cat-card:hover .cat-title { color: var(--pink); }
+.cat-card:hover .cat-title { color: var(--gold); }
 
-.cat-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+.cat-desc { font-size: 14px; color: rgba(255,255,255,0.88); line-height: 1.6; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
 
 .cat-arrow {
   position: absolute;
   bottom: var(--sp-3);
   right: var(--sp-3);
   font-size: 18px;
-  color: var(--gold-lt);
+  color: var(--gold);
   transition: all var(--transition);
 }
 
-.cat-card:hover .cat-arrow { color: var(--gold); transform: translateX(4px); }
+.cat-card:hover .cat-arrow { color: #fff; transform: translateX(4px); }
 
 /* ══════════════════════════════════════════
    WHY EMPIRE
@@ -885,6 +891,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-bottom: var(--sp-2);
   display: -webkit-box;
   -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
