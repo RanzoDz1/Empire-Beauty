@@ -1176,6 +1176,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .bento-grid::-webkit-scrollbar { display: none; }
   .cat-card {
     flex: 0 0 78vw;
+    min-width: 78vw;
     scroll-snap-align: start;
   }
 
