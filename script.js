@@ -218,36 +218,6 @@
   }
 
   /* ══════════════════════════════════════════
-     BENTO GRID CAROUSEL ARROWS
-  ══════════════════════════════════════════ */
-  const bentoGrid  = $('.bento-grid');
-  const arrowLeft  = $('.carousel-arrow.left');
-  const arrowRight = $('.carousel-arrow.right');
-
-  if (bentoGrid && arrowLeft && arrowRight) {
-    function updateArrows() {
-      const sl = bentoGrid.scrollLeft;
-      const maxScroll = bentoGrid.scrollWidth - bentoGrid.clientWidth;
-      arrowLeft.classList.toggle('hidden', sl <= 2);
-      arrowRight.classList.toggle('hidden', sl >= maxScroll - 2);
-    }
-
-    arrowLeft.addEventListener('click', () => {
-      bentoGrid.scrollBy({ left: -(bentoGrid.clientWidth * 0.8), behavior: 'smooth' });
-    });
-
-    arrowRight.addEventListener('click', () => {
-      bentoGrid.scrollBy({ left: bentoGrid.clientWidth * 0.8, behavior: 'smooth' });
-    });
-
-    bentoGrid.addEventListener('scroll', updateArrows, { passive: true });
-    window.addEventListener('resize', updateArrows, { passive: true });
-    // Initial state
-    window.addEventListener('load', updateArrows);
-    if (document.readyState === 'complete') updateArrows();
-  }
-
-  /* ══════════════════════════════════════════
      FAQ ACCORDION
   ══════════════════════════════════════════ */
   $$('.faq-item').forEach(item => {

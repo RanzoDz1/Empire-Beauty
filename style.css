@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   EMPIRE HAIR & BEAUTY SUPPLY — MAIN STYLESHEET
+   EMPIRE HAIR & BEAUTY SUPPLY - MAIN STYLESHEET
    Design System: Deep Rose #B5325F | Gold #D4AF37
    ═══════════════════════════════════════════════════ */
 
@@ -557,7 +557,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   justify-content: flex-end;
 }
 
-/* Dark gradient overlay anchored to bottom — photos show through beautifully */
+/* Dark gradient overlay anchored to bottom - photos show through beautifully */
 .cat-card::before {
   content: '';
   position: absolute;
@@ -776,7 +776,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ══════════════════════════════════════════
-   REVIEWS — MARQUEE
+   REVIEWS - MARQUEE
 ══════════════════════════════════════════ */
 .reviews {
   background: var(--white);
@@ -1130,46 +1130,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--gold-dk);
 }
 
-/* ══════════════════════════════════════════
-   CAROUSEL ARROWS
-══════════════════════════════════════════ */
-.carousel-wrap {
-  position: relative;
-}
-
-.carousel-arrow {
-  display: none; /* hidden by default on desktop */
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--white);
-  color: var(--charcoal);
-  border: none;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.25s ease, background var(--transition);
-}
-
-.carousel-arrow.left  { left: 4px; }
-.carousel-arrow.right { right: 4px; }
-
-.carousel-arrow:hover { background: var(--gold-lt); }
-
-.carousel-arrow.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
 
 /* ══════════════════════════════════════════
-   RESPONSIVE — TABLET
+   RESPONSIVE - TABLET
 ══════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .section { padding: var(--sp-6) 0; }
@@ -1181,7 +1144,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ══════════════════════════════════════════
-   RESPONSIVE — MOBILE
+   RESPONSIVE - MOBILE
 ══════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root { --header-h: 64px; }
@@ -1202,27 +1165,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .section-title { font-size: 28px; text-align: center !important; }
   .section-sub   { font-size: 15px; }
 
+  /* Category grid: 2-column compact grid */
   .bento-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 0 16px 12px;
-    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
-  .bento-grid::-webkit-scrollbar { display: none; }
-  .carousel-arrow { display: flex; }
   .cat-card {
-    flex: 0 0 78vw;
-    min-width: 78vw;
-    scroll-snap-align: start;
+    min-height: 160px;
   }
 
   .why-inner { grid-template-columns: 1fr; gap: var(--sp-4); }
   .why-image-bg { min-height: 280px; }
 
-  /* Trust bar — premium badge cards */
+  /* Trust bar - premium badge cards */
   .trust-points {
     display: grid;
     grid-template-columns: 1fr 1fr;
