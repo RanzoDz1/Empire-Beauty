@@ -1164,7 +1164,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .section-title { font-size: 28px; text-align: center !important; }
   .section-sub   { font-size: 15px; }
 
-  .bento-grid { grid-template-columns: 1fr; gap: var(--sp-2); }
+  .bento-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 0 16px 12px;
+    scrollbar-width: none;
+  }
+  .bento-grid::-webkit-scrollbar { display: none; }
+  .cat-card {
+    flex: 0 0 78vw;
+    scroll-snap-align: start;
+  }
 
   .why-inner { grid-template-columns: 1fr; gap: var(--sp-4); }
   .why-image-bg { min-height: 280px; }
