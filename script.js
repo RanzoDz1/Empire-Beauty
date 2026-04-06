@@ -7,15 +7,31 @@
 (function () {
   'use strict';
 
+  /* ══════════════════════════════════════════
+     SCROLL RESTORATION — always start at top
+  ══════════════════════════════════════════ */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
   /* ══════════════════════════════════════════
-     STICKY HEADER
+     STICKY HEADER + HIDE ON SCROLL DOWN
   ══════════════════════════════════════════ */
   const header = $('#site-header');
+  if (header) header.style.transition = 'transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s';
+  var lastScrollY = 0;
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 10);
+    if (!header) return;
+    var y = window.scrollY;
+    header.classList.toggle('scrolled', y > 10);
+    if (y > 120 && y > lastScrollY) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+    lastScrollY = y;
   }, { passive: true });
 
   /* ══════════════════════════════════════════
@@ -272,5 +288,29 @@
     if(e.target === modal) closeCategoryModal();
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeCategoryModal(); });
+
+  /* ══════════════════════════════════════════
+     BACK BUTTON INTERCEPTOR
+  ══════════════════════════════════════════ */
+  history.pushState({ __eb: true }, '');
+  window.addEventListener('popstate', function () {
+    // 1. Close category modal if open
+    if (modal && modal.classList.contains('open')) {
+      closeCategoryModal();
+      history.pushState({ __eb: true }, '');
+      return;
+    }
+    // 2. Close mobile menu if open
+    if (mobileMenu && mobileMenu.classList.contains('open')) {
+      closeMenu();
+      history.pushState({ __eb: true }, '');
+      return;
+    }
+    // 3. Scroll to top
+    if (window.scrollY > 50) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.pushState({ __eb: true }, '');
+    }
+  });
 
 })();
