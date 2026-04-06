@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════
    EMPIRE HAIR & BEAUTY SUPPLY — MAIN SCRIPT
    Vanilla JS: header, mobile menu, scroll reveal,
-   reviews marquee (rAF smooth scroll), FAQ accordion
+   reviews snap carousel, FAQ accordion
    ═══════════════════════════════════════════════════ */
 
 (function () {
@@ -70,152 +70,51 @@
   }
 
   /* ══════════════════════════════════════════
-     REVIEWS MARQUEE — rAF smooth infinite scroll
-     Uses requestAnimationFrame for buttery motion
+     REVIEWS SNAP CAROUSEL
   ══════════════════════════════════════════ */
-  const marqueeTrack = $('#reviews-marquee-track');
-  const marqueeOuter = marqueeTrack ? marqueeTrack.parentElement : null;
+  (function initReviewsCarousel() {
+    var track = document.getElementById('reviews-marquee-track');
+    if (!track) return;
 
-  if (marqueeTrack && marqueeOuter) {
-    /* 1. Clone all 9 cards and append → 18 total for seamless loop */
-    const origCards = [...marqueeTrack.children];
-    origCards.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.querySelectorAll('a').forEach(a => a.setAttribute('tabindex', '-1'));
-      marqueeTrack.appendChild(clone);
+    var leftBtn = document.querySelector('.reviews-arrow.left');
+    var rightBtn = document.querySelector('.reviews-arrow.right');
+
+    function getScrollAmount() {
+      var card = track.querySelector('.review-card');
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+      return card.offsetWidth + gap;
+    }
+
+    function updateArrows() {
+      if (!leftBtn || !rightBtn) return;
+      leftBtn.classList.toggle('hidden', track.scrollLeft <= 2);
+      rightBtn.classList.toggle('hidden', track.scrollLeft >= track.scrollWidth - track.clientWidth - 2);
+    }
+
+    if (leftBtn) leftBtn.addEventListener('click', function() {
+      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+      clearInterval(autoTimer);
+    });
+    if (rightBtn) rightBtn.addEventListener('click', function() {
+      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      clearInterval(autoTimer);
     });
 
-    /* 2. Remove any CSS animation (we drive it with rAF) */
-    marqueeTrack.style.animation = 'none';
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    setTimeout(updateArrows, 300);
 
-    let scrollPos  = 0;        // current pixel offset
-    const SPEED    = 0.55;     // px per frame (~33fps at 0.55 = ~18px/s)
-    let   paused   = false;
-    let   rafId    = null;
-    let   halfWidth = 0;
-
-    /* Measure half-width (= one full set of cards) */
-    function measureHalf() {
-      // Must wait until layout is done
-      halfWidth = marqueeTrack.scrollWidth / 2;
-    }
-
-    function step() {
-      if (!paused && halfWidth > 0) {
-        scrollPos += SPEED;
-        if (scrollPos >= halfWidth) {
-          scrollPos -= halfWidth;   // instant snap — seamless because clones match originals
-        }
-        marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
+    var autoTimer = setInterval(function() {
+      if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
       }
-      rafId = requestAnimationFrame(step);
-    }
+    }, 4500);
 
-    /* Pause on hover */
-    marqueeOuter.addEventListener('mouseenter', () => { paused = true;  });
-    marqueeOuter.addEventListener('mouseleave', () => { paused = false; });
-
-    /* Touch timer for resuming auto-scroll */
-    let touchTimer = null;
-
-    /* Kick off after fonts/images settle */
-    window.addEventListener('load', () => {
-      measureHalf();
-      step();
-    });
-
-    /* Fallback if load already fired */
-    if (document.readyState === 'complete') {
-      measureHalf();
-      if (!rafId) step();
-    }
-
-    /* Recalculate on resize */
-    window.addEventListener('resize', measureHalf, { passive: true });
-
-    /* ── Touch drag with momentum scrolling ── */
-    let touchStartX  = 0;
-    let touchStartY  = 0;
-    let touchCurrentX = 0;
-    let dragStartPos = 0;
-    let isDragging   = false;
-    let momentumRaf  = null;
-    const TOUCH_HISTORY_SIZE = 5;
-    let touchHistory = []; // {x, t} pairs
-
-    marqueeOuter.addEventListener('touchstart', e => {
-      paused = true;
-      clearTimeout(touchTimer);
-      if (momentumRaf) { cancelAnimationFrame(momentumRaf); momentumRaf = null; }
-
-      const touch = e.touches[0];
-      touchStartX  = touch.clientX;
-      touchStartY  = touch.clientY;
-      touchCurrentX = touchStartX;
-      dragStartPos = scrollPos;
-      isDragging   = false;
-      touchHistory = [{ x: touch.clientX, t: Date.now() }];
-    }, { passive: true });
-
-    marqueeOuter.addEventListener('touchmove', e => {
-      const touch = e.touches[0];
-      const dx = touch.clientX - touchStartX;
-      const dy = touch.clientY - touchStartY;
-
-      // If mostly vertical scrolling, ignore
-      if (!isDragging && Math.abs(dy) > Math.abs(dx)) return;
-      isDragging = true;
-
-      touchCurrentX = touch.clientX;
-      touchHistory.push({ x: touch.clientX, t: Date.now() });
-      if (touchHistory.length > TOUCH_HISTORY_SIZE) touchHistory.shift();
-
-      let newPos = dragStartPos - dx;
-      if (halfWidth > 0) {
-        // Wrap around
-        while (newPos < 0) newPos += halfWidth;
-        while (newPos >= halfWidth) newPos -= halfWidth;
-      }
-      scrollPos = newPos;
-      marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
-    }, { passive: true });
-
-    marqueeOuter.addEventListener('touchend', () => {
-      if (!isDragging || touchHistory.length < 2) {
-        // Short tap — resume after delay
-        touchTimer = setTimeout(() => { paused = false; }, 2000);
-        return;
-      }
-
-      // Calculate velocity from touch history
-      const last  = touchHistory[touchHistory.length - 1];
-      const first = touchHistory[0];
-      const dt    = last.t - first.t;
-      let velocity = dt > 0 ? (first.x - last.x) / dt : 0; // px/ms, positive = scroll right
-
-      const FRICTION = 0.95;
-      const MIN_VEL  = 0.08; // px/ms threshold to stop
-
-      function momentumStep() {
-        velocity *= FRICTION;
-        if (Math.abs(velocity) < MIN_VEL) {
-          momentumRaf = null;
-          // Resume auto-scroll from current position
-          paused = false;
-          return;
-        }
-        scrollPos += velocity * 16; // ~16ms per frame
-        if (halfWidth > 0) {
-          while (scrollPos < 0) scrollPos += halfWidth;
-          while (scrollPos >= halfWidth) scrollPos -= halfWidth;
-        }
-        marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
-        momentumRaf = requestAnimationFrame(momentumStep);
-      }
-      momentumRaf = requestAnimationFrame(momentumStep);
-    }, { passive: true });
-  }
+    track.addEventListener('touchstart', function() { clearInterval(autoTimer); }, { passive: true });
+  })();
 
   /* ══════════════════════════════════════════
      FAQ ACCORDION
