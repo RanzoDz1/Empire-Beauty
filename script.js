@@ -17,21 +17,12 @@
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
   /* ══════════════════════════════════════════
-     STICKY HEADER + HIDE ON SCROLL DOWN
+     STICKY HEADER — always visible
   ══════════════════════════════════════════ */
   const header = $('#site-header');
-  if (header) header.style.transition = 'transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s';
-  var lastScrollY = 0;
   window.addEventListener('scroll', () => {
     if (!header) return;
-    var y = window.scrollY;
-    header.classList.toggle('scrolled', y > 10);
-    if (y > 120 && y > lastScrollY) {
-      header.style.transform = 'translateY(-100%)';
-    } else {
-      header.style.transform = 'translateY(0)';
-    }
-    lastScrollY = y;
+    header.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
 
   /* ══════════════════════════════════════════
@@ -125,15 +116,8 @@
     marqueeOuter.addEventListener('mouseenter', () => { paused = true;  });
     marqueeOuter.addEventListener('mouseleave', () => { paused = false; });
 
-    /* Pause on touch (mobile); resume after 2s of no interaction */
+    /* Touch timer for resuming auto-scroll */
     let touchTimer = null;
-    marqueeOuter.addEventListener('touchstart', () => {
-      paused = true;
-      clearTimeout(touchTimer);
-    }, { passive: true });
-    marqueeOuter.addEventListener('touchend', () => {
-      touchTimer = setTimeout(() => { paused = false; }, 2000);
-    }, { passive: true });
 
     /* Kick off after fonts/images settle */
     window.addEventListener('load', () => {
@@ -149,6 +133,118 @@
 
     /* Recalculate on resize */
     window.addEventListener('resize', measureHalf, { passive: true });
+
+    /* ── Touch drag with momentum scrolling ── */
+    let touchStartX  = 0;
+    let touchStartY  = 0;
+    let touchCurrentX = 0;
+    let dragStartPos = 0;
+    let isDragging   = false;
+    let momentumRaf  = null;
+    const TOUCH_HISTORY_SIZE = 5;
+    let touchHistory = []; // {x, t} pairs
+
+    marqueeOuter.addEventListener('touchstart', e => {
+      paused = true;
+      clearTimeout(touchTimer);
+      if (momentumRaf) { cancelAnimationFrame(momentumRaf); momentumRaf = null; }
+
+      const touch = e.touches[0];
+      touchStartX  = touch.clientX;
+      touchStartY  = touch.clientY;
+      touchCurrentX = touchStartX;
+      dragStartPos = scrollPos;
+      isDragging   = false;
+      touchHistory = [{ x: touch.clientX, t: Date.now() }];
+    }, { passive: true });
+
+    marqueeOuter.addEventListener('touchmove', e => {
+      const touch = e.touches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+
+      // If mostly vertical scrolling, ignore
+      if (!isDragging && Math.abs(dy) > Math.abs(dx)) return;
+      isDragging = true;
+
+      touchCurrentX = touch.clientX;
+      touchHistory.push({ x: touch.clientX, t: Date.now() });
+      if (touchHistory.length > TOUCH_HISTORY_SIZE) touchHistory.shift();
+
+      let newPos = dragStartPos - dx;
+      if (halfWidth > 0) {
+        // Wrap around
+        while (newPos < 0) newPos += halfWidth;
+        while (newPos >= halfWidth) newPos -= halfWidth;
+      }
+      scrollPos = newPos;
+      marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
+    }, { passive: true });
+
+    marqueeOuter.addEventListener('touchend', () => {
+      if (!isDragging || touchHistory.length < 2) {
+        // Short tap — resume after delay
+        touchTimer = setTimeout(() => { paused = false; }, 2000);
+        return;
+      }
+
+      // Calculate velocity from touch history
+      const last  = touchHistory[touchHistory.length - 1];
+      const first = touchHistory[0];
+      const dt    = last.t - first.t;
+      let velocity = dt > 0 ? (first.x - last.x) / dt : 0; // px/ms, positive = scroll right
+
+      const FRICTION = 0.95;
+      const MIN_VEL  = 0.08; // px/ms threshold to stop
+
+      function momentumStep() {
+        velocity *= FRICTION;
+        if (Math.abs(velocity) < MIN_VEL) {
+          momentumRaf = null;
+          // Resume auto-scroll from current position
+          paused = false;
+          return;
+        }
+        scrollPos += velocity * 16; // ~16ms per frame
+        if (halfWidth > 0) {
+          while (scrollPos < 0) scrollPos += halfWidth;
+          while (scrollPos >= halfWidth) scrollPos -= halfWidth;
+        }
+        marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
+        momentumRaf = requestAnimationFrame(momentumStep);
+      }
+      momentumRaf = requestAnimationFrame(momentumStep);
+    }, { passive: true });
+  }
+
+  /* ══════════════════════════════════════════
+     BENTO GRID CAROUSEL ARROWS
+  ══════════════════════════════════════════ */
+  const bentoGrid  = $('.bento-grid');
+  const arrowLeft  = $('.carousel-arrow.left');
+  const arrowRight = $('.carousel-arrow.right');
+
+  if (bentoGrid && arrowLeft && arrowRight) {
+    function updateArrows() {
+      const sl = bentoGrid.scrollLeft;
+      const maxScroll = bentoGrid.scrollWidth - bentoGrid.clientWidth;
+      arrowLeft.classList.toggle('hidden', sl <= 2);
+      arrowRight.classList.toggle('hidden', sl >= maxScroll - 2);
+    }
+
+    arrowLeft.addEventListener('click', () => {
+      bentoGrid.scrollBy({ left: -(bentoGrid.clientWidth * 0.8), behavior: 'smooth' });
+    });
+
+    arrowRight.addEventListener('click', () => {
+      bentoGrid.scrollBy({ left: bentoGrid.clientWidth * 0.8, behavior: 'smooth' });
+    });
+
+    bentoGrid.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows, { passive: true });
+    // Initial state
+    window.addEventListener('load', updateArrows);
+    if (document.readyState === 'complete') updateArrows();
   }
 
   /* ══════════════════════════════════════════
