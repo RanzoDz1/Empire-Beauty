@@ -1,0 +1,4 @@
+# Portfolio-Kopie. Nicht indexieren, damit sie nicht mit der Website
+# des Kunden um Suchmaschinen-Rankings konkurriert.
+User-agent: *
+Disallow: /
